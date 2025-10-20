@@ -1,5 +1,5 @@
-# pemrograman_web_itera_123140172
+# Pemrograman_Web_ITERA_123140172
 
-Nama : Atika Adelia 
-NIM : 123140172 
-Kelas : RB
+- **Mata Kuliah:** Praktikum Pemrograman Aplikasi dan Web 
+- **Nama:** Atika Adelia 
+- **NIM:** 123140172
