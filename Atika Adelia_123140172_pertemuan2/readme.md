@@ -42,7 +42,7 @@
      <img width="599" height="250" alt="Screen Shot 2025-10-27 at 14 52 09" src="https://github.com/user-attachments/assets/1bb98dd2-587e-4de1-a4d6-7989582723e4" />
 
 # DOKUMENTASI TUGAS PRAKTIKUM PERTEMUAN 2 
-# Di edit terakhir tanggal 27 Oktober Pukul 14.54
+# Di edit terakhir tanggal 27 Oktober 2025 Pukul 14.54
 
      
 
