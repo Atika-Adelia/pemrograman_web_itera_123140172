@@ -4,7 +4,7 @@
 - **Nama:** Atika Adelia 
 - **NIM:** 123140172
 
-# Klarifikasi bahwa saya mengumpulkan tugas 1 tidak telat commit ke github 
+# KLARIFIKASI BAHWA SAYA MENGUMPULKAN TUGAS 1 TIDAK TELAT COMMIT KE GITHUB 
 
 <img width="761" height="471" alt="Screen Shot 2025-10-27 at 13 39 48" src="https://github.com/user-attachments/assets/2ef70844-505d-4e57-9e99-2a2f7997d9ce" />
 <img width="1440" height="900" alt="Screen Shot 2025-10-25 at 11 16 48" src="https://github.com/user-attachments/assets/abdea585-42b7-4d19-8d7f-f0bf8db87666" />
