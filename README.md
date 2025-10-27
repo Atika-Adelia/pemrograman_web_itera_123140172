@@ -10,5 +10,5 @@
 <img width="1440" height="900" alt="Screen Shot 2025-10-25 at 11 16 48" src="https://github.com/user-attachments/assets/abdea585-42b7-4d19-8d7f-f0bf8db87666" />
 
 
-Maaf bang karena kecerobohan saya file tugas pertmuan 1 saya hilang bahkan seluruh proses commit sebelumnya hilang, jadi saya commit ulang bang, mohon maaf sekali bang, tetapi saya mengumpulkan tugas tersebut tepat 18 Oktober 2025 bang, mohon maaf sekali bang atas kecerobohan saya
+Maaf bang karena kecerobohan saya, file tugas pertemuan 1 saya hilang bahkan seluruh proses commit sebelumnya hilang, jadi saya commit ulang bang, mohon maaf sekali bang, tetapi saya mengumpulkan tugas tersebut dan mengcommit tepat **18 Oktober 2025 Sebelum Kelas Praktikum Ke-2 Dimulai** bang, mohon maaf sekali bang atas kecerobohan saya
 
