@@ -14,4 +14,4 @@ Berikut adalah bukti untuk tugas 1 :
 Maaf bang karena kecerobohan saya, file tugas pertemuan 1 saya hilang bahkan seluruh proses commit sebelumnya hilang, jadi saya commit ulang bang, mohon maaf sekali bang, tetapi saya mengumpulkan tugas tersebut dan mengcommit tepat **18 Oktober 2025 Sebelum Kelas Praktikum Ke-2 Dimulai** bang, mohon maaf sekali bang atas kecerobohan saya
 
 Berikut adalah bukti untuk tugas 3 : 
-![Bukti Kumpul Pert 3](../BuktiKumpulPert3SebelumDL.png)
+<img width="1440" height="860" alt="buktiKumpulPert3SebelumDL" src="https://github.com/user-attachments/assets/1fb4b40d-10e8-4b95-b201-daa76eae306b" />
