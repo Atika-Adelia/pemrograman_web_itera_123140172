@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Tambahkan ini di file .gitignore Anda
+node_modules/
+package-lock.json
