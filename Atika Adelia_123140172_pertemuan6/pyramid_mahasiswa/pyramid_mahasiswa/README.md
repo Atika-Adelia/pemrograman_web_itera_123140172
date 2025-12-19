@@ -177,8 +177,29 @@ curl -X DELETE http://localhost:6543/api/matakuliah/1
 
 ```json
 {
-  "status": "deleted",
-  "message": "Matakuliah ID 1 berhasil dihapus"
+  "matakuliahs": [
+    {
+      "id": 2,
+      "kode_mk": "IF202",
+      "nama_mk": "Basis Data",
+      "sks": 4,
+      "semester": 3
+    },
+    {
+      "id": 3,
+      "kode_mk": "IF303",
+      "nama_mk": "Pemrograman Web",
+      "sks": 3,
+      "semester": 5
+    },
+    {
+      "id": 4,
+      "kode_mk": "IF103",
+      "nama_mk": "Metodologi Penelitian",
+      "sks": 3,
+      "semester": 5
+    }
+  ]
 }
 
 ```
