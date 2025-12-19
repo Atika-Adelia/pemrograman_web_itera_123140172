@@ -1,18 +1,23 @@
 from sqlalchemy import (
     Column,
-    Index,
     Integer,
     Text,
 )
-
 from .meta import Base
 
-
-class MyModel(Base):
-    __tablename__ = 'models'
+class Matakuliah(Base):
+    __tablename__ = 'matakuliah'
     id = Column(Integer, primary_key=True)
-    name = Column(Text)
-    value = Column(Integer)
+    kode_mk = Column(Text, unique=True, nullable=False)
+    nama_mk = Column(Text, nullable=False)
+    sks = Column(Integer, nullable=False)
+    semester = Column(Integer, nullable=False)
 
-
-Index('my_index', MyModel.name, unique=True, mysql_length=255)
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'kode_mk': self.kode_mk,
+            'nama_mk': self.nama_mk,
+            'sks': self.sks,
+            'semester': self.semester,
+        }

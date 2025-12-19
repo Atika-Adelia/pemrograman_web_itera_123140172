@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Manajemen Matakuliah</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #ff00e6;
+            --danger-color: #dc3545;
+            --bg-color: #f8f9fa;
+            --text-color: #2d3436;
+        }
+    
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+    
+        .container {
+            width: 100%;
+            max-width: 900px;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+    
+        h2 {
+            text-align: center;
+            font-weight: 700;
+            margin-bottom: 35px;
+            font-size: 28px;
+            color: #2d3436;
+        }
+    
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+    
+        input {
+            /* Memastikan input juga menggunakan Poppins */
+            font-family: 'Poppins', sans-serif;
+            padding: 14px 18px;
+            border: 2px solid #edf2f7;
+            border-radius: 12px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+    
+        input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.1);
+        }
+    
+        .btn-add {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            grid-column: span 2;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+    
+        .btn-add:hover {
+            background-color: #5e1255;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+        }
+    
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+    
+        th {
+            text-align: left;
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #a0aec0;
+            padding: 15px;
+            border-bottom: 2px solid #f7fafc;
+        }
+    
+        td {
+            padding: 20px 15px;
+            border-bottom: 1px solid #f7fafc;
+            font-size: 15px;
+        }
+    
+        .btn-del {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fff5f5;
+            color: var(--danger-color);
+            border: 1px solid #feb2b2;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+    
+        .btn-del:hover {
+            background-color: var(--danger-color);
+            color: white;
+        }
+    
+        b { color: var(--primary-color); }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div style="text-align: center; margin-bottom: 10px;">
+        <img src="pyramid.png" alt="Logo Pyramid" style="width: 70px;">
+    </div>
+
+    <h2>📚 Manajemen Matakuliah</h2>
+    
+    <div class="form-grid">
+        <input type="text" id="kode" placeholder="Kode MK (Contoh: IF101)">
+        <input type="text" id="nama" placeholder="Nama Mata Kuliah">
+        <input type="number" id="sks" placeholder="Jumlah SKS">
+        <input type="number" id="semester" placeholder="Semester">
+        <button class="btn-add" onclick="simpan()">Simpan Matakuliah</button>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Kode</th>
+                <th>Nama Matakuliah</th>
+                <th>SKS</th>
+                <th>Smt</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody id="list-mk"></tbody>
+    </table>
+</div>
+
+<script>
+    const API = '/api/matakuliah';
+
+    async function ambilData() {
+        try {
+            const res = await fetch(API);
+            const data = await res.json();
+            const container = document.getElementById('list-mk');
+            container.innerHTML = data.matakuliahs.map(mk => `
+                <tr>
+                    <td><b>${mk.kode_mk}</b></td>
+                    <td>${mk.nama_mk}</td>
+                    <td>${mk.sks}</td>
+                    <td>${mk.semester}</td>
+                    <td><button class="btn-del" onclick="hapus(${mk.id})">Hapus</button></td>
+                </tr>`).join('');
+        } catch (e) { console.error("Error load data", e); }
+    }
+
+    async function simpan() {
+        const payload = {
+            kode_mk: document.getElementById('kode').value,
+            nama_mk: document.getElementById('nama').value,
+            sks: parseInt(document.getElementById('sks').value),
+            semester: parseInt(document.getElementById('semester').value)
+        };
+        await fetch(API, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(payload)
+        });
+        location.reload();
+    }
+
+    async function hapus(id) {
+        if(confirm('Yakin ingin menghapus data ini?')) {
+            // Menggunakan backtick untuk path parameter ID
+            await fetch(`${API}/${id}`, { method: 'DELETE' });
+            ambilData();
+        }
+    }
+
+    ambilData();
+</script>
+</body>
+</html>

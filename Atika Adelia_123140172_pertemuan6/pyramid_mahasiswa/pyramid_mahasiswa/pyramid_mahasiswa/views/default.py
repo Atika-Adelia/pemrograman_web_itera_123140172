@@ -1,32 +1,68 @@
-from pyramid.response import Response
 from pyramid.view import view_config
-
+from pyramid.response import Response
+from pyramid.httpexceptions import HTTPFound 
+from pyramid.view import view_config
 from sqlalchemy.exc import DBAPIError
+from ..models import Matakuliah
 
-from .. import models
-
-
-@view_config(route_name='home', renderer='../templates/mytemplate.jinja2')
-def my_view(request):
+# Mendapatkan semua matakuliah
+@view_config(route_name='api_matakuliah', renderer='json', request_method='GET')
+def get_all_matakuliah(request):
     try:
-        query = request.dbsession.query(models.MyModel)
-        one = query.filter(models.MyModel.name == 'one').first()
+        query = request.dbsession.query(Matakuliah).all()
+        return {'matakuliahs': [mk.to_dict() for mk in query]}
     except DBAPIError:
-        return Response(db_err_msg, content_type='text/plain', status=500)
-    return {'one': one, 'project': 'pyramid_mahasiswa'}
+        return Response("Database error", content_type='text/plain', status=500)
 
+# Menambahkan matakuliah baru
+@view_config(route_name='api_matakuliah', renderer='json', request_method='POST')
+def create_matakuliah(request):
+    data = request.json_body
+    new_mk = Matakuliah(
+        kode_mk=data['kode_mk'],
+        nama_mk=data['nama_mk'],
+        sks=data['sks'],
+        semester=data['semester']
+    )
+    request.dbsession.add(new_mk)
+    return {'status': 'success', 'data': new_mk.to_dict()}
 
-db_err_msg = """\
-Pyramid is having a problem using your SQL database.  The problem
-might be caused by one of the following things:
+# Mendapatkan detail satu matakuliah
+@view_config(route_name='api_matakuliah_id', renderer='json', request_method='GET')
+def get_one_matakuliah(request):
+    mk_id = request.matchdict['id']
+    mk = request.dbsession.query(Matakuliah).filter_by(id=mk_id).first()
+    if mk:
+        return mk.to_dict()
+    return Response(json_body={'error': 'Data tidak ditemukan'}, status=404)
 
-1.  You may need to initialize your database tables with `alembic`.
-    Check your README.txt for description and try to run it.
+# Mengupdate data matakuliah
+@view_config(route_name='api_matakuliah_id', renderer='json', request_method='PUT')
+def update_matakuliah(request):
+    mk_id = request.matchdict['id']
+    data = request.json_body
+    mk = request.dbsession.query(Matakuliah).filter_by(id=mk_id).first()
+    
+    if mk:
+        mk.kode_mk = data.get('kode_mk', mk.kode_mk)
+        mk.nama_mk = data.get('nama_mk', mk.nama_mk)
+        mk.sks = data.get('sks', mk.sks)
+        mk.semester = data.get('semester', mk.semester)
+        return {'status': 'updated', 'data': mk.to_dict()}
+    return Response(json_body={'error': 'Data gagal diupdate'}, status=404)
 
-2.  Your database server may not be running.  Check that the
-    database server referred to by the "sqlalchemy.url" setting in
-    your "development.ini" file is running.
+# Menghapus data matakuliah
+@view_config(route_name='api_matakuliah_id', renderer='json', request_method='DELETE')
+def delete_matakuliah(request):
+    mk_id = request.matchdict['id']
+    mk = request.dbsession.query(Matakuliah).filter_by(id=mk_id).first()
+    
+    if mk:
+        request.dbsession.delete(mk)
+        return {'status': 'deleted', 'message': f'Matakuliah ID {mk_id} berhasil dihapus'}
+    return Response(json_body={'error': 'Data tidak ditemukan'}, status=404)
 
-After you fix the problem, please restart the Pyramid application to
-try it again.
-"""
+@view_config(route_name='home')
+def my_view(request):
+    # Mengarahkan ke folder static yang berisi index.html
+    return HTTPFound(location=request.static_url('pyramid_mahasiswa:static/index.html'))
