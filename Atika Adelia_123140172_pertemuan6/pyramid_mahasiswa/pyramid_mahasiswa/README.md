@@ -204,6 +204,10 @@ curl -X DELETE http://localhost:6543/api/matakuliah/1
 
 ```
 
+### 4. Tampilan Aplikasi : 
+
+<img width="941" height="795" alt="Screen Shot 2025-12-19 at 17 59 01" src="https://github.com/user-attachments/assets/5ac96190-19bf-484e-a8bb-06a70a1ed902" />
+
 ---
 
 ## Testing
