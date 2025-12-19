@@ -10,5 +10,3 @@ Buka terminal di folder proyek Anda dan jalankan perintah:
 ```bash
 python3 -m venv venv
 source venv/bin/activate
-
-nah lanjutin di halaman ini lhooooo ya allahhhhh
