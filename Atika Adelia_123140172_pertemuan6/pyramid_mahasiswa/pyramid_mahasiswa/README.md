@@ -104,13 +104,6 @@ curl -X POST http://localhost:6543/api/matakuliah -H "Content-Type: application/
       "sks": 3,
       "semester": 5
     },
-    {
-      "id": 4,
-      "kode_mk": "IF103",
-      "nama_mk": "Metodologi Penelitian",
-      "sks": 3,
-      "semester": 5
-    }
   ]
 }
 
@@ -125,7 +118,7 @@ Menambahkan data mata kuliah baru ke database.
 * **Request:**
 
 ```bash
-curl -X POST http://localhost:6543/api/matakuliah -H "Content-Type: application/json" -d '{"kode_mk": "IF202", "nama_mk": "Basis Data", "sks": 4, "semester": 3}'
+curl -X POST http://localhost:6543/api/matakuliah -H "Content-Type: application/json" -d '{"kode_mk": "IF103", "nama_mk": "Metodologi Penelitian", "sks": 3, "semester": 5}'
 
 ```
 
@@ -133,14 +126,36 @@ curl -X POST http://localhost:6543/api/matakuliah -H "Content-Type: application/
 
 ```json
 {
-  "status": "success",
-  "data": {
-    "id": 2,
-    "kode_mk": "IF202",
-    "nama_mk": "Basis Data",
-    "sks": 4,
-    "semester": 3
-  }
+  "matakuliahs": [
+    {
+      "id": 1,
+      "kode_mk": "IF101",
+      "nama_mk": "Algoritma dan Pemrograman",
+      "sks": 3,
+      "semester": 1
+    },
+    {
+      "id": 2,
+      "kode_mk": "IF202",
+      "nama_mk": "Basis Data",
+      "sks": 4,
+      "semester": 3
+    },
+    {
+      "id": 3,
+      "kode_mk": "IF303",
+      "nama_mk": "Pemrograman Web",
+      "sks": 3,
+      "semester": 5
+    },
+    {
+      "id": 4,
+      "kode_mk": "IF103",
+      "nama_mk": "Metodologi Penelitian",
+      "sks": 3,
+      "semester": 5
+    }
+  ]
 }
 
 ```
