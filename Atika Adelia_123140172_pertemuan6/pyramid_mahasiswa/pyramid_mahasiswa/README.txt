@@ -1,43 +1,163 @@
-pyramid_mahasiswa
-=================
+Minta maaf ya, saya mengerti maksud kamu. Kamu ingin **satu blok kode utuh** yang tidak terpotong-potong agar tinggal *copy-paste* sekali jalan ke file `README.md`.
 
-Getting Started
----------------
+Berikut adalah kode lengkapnya dalam satu blok:
 
-- Change directory into your newly created project.
+```markdown
+# Manajemen Matakuliah - API & Frontend
 
-    cd pyramid_mahasiswa
+## Deskripsi Proyek
+Aplikasi ini adalah sistem manajemen data mata kuliah sederhana yang dibangun menggunakan **Pyramid Web Framework** dan **SQLAlchemy**. Aplikasi ini menyediakan layanan RESTful API untuk operasi CRUD (Create, Read, Update, Delete) dan memiliki tampilan frontend modern berbasis HTML statis dengan font **Poppins** yang tersimpan di direktori `static/`.
 
-- Create a Python virtual environment.
+## Cara Instalasi
 
-    python3 -m venv env
+### 1. Membuat Virtual Environment
+Buka terminal di folder proyek Anda dan jalankan perintah:
+```bash
+python3 -m venv venv
+source venv/bin/activate
 
-- Upgrade packaging tools.
+```
 
-    env/bin/pip install --upgrade pip setuptools
+### 2. Instalasi Dependensi
 
-- Install the project in editable mode with its testing requirements.
+Instal package yang dibutuhkan termasuk Pyramid dan SQLAlchemy:
 
-    env/bin/pip install -e ".[testing]"
+```bash
+pip install -e .
 
-- Initialize and upgrade the database using Alembic.
+```
 
-    - Generate your first revision.
+### 3. Konfigurasi Database
 
-        env/bin/alembic -c development.ini revision --autogenerate -m "init"
+Inisialisasi database menggunakan Alembic yang tersimpan di folder `alembic/` untuk membuat tabel berdasarkan model yang telah didefinisikan di folder `models/`:
 
-    - Upgrade to that revision.
+```bash
+alembic -c development.ini upgrade head
 
-        env/bin/alembic -c development.ini upgrade head
+```
 
-- Load default data into the database using a script.
+## Cara Menjalankan
 
-    env/bin/initialize_pyramid_mahasiswa_db development.ini
+### 1. Menjalankan Migrasi
 
-- Run your project's tests.
+Jika terdapat perubahan struktur pada file model (`mymodel.py`), jalankan perintah migrasi berikut:
 
-    env/bin/pytest
+```bash
+alembic -c development.ini revision --autogenerate -m "inisialisasi matakuliah"
+alembic -c development.ini upgrade head
 
-- Run your project.
+```
 
-    env/bin/pserve development.ini
+### 2. Menjalankan Server
+
+Jalankan server aplikasi menggunakan file konfigurasi utama `development.ini`:
+
+```bash
+pserve development.ini
+
+```
+
+Server akan berjalan di `http://localhost:6543/`. Halaman utama secara otomatis akan mengarah ke tampilan frontend dashboard yang sudah di-styling.
+
+---
+
+## API Endpoints
+
+### 1. Get All Matakuliah
+
+Mendapatkan semua daftar mata kuliah yang tersimpan di database.
+
+* **Method:** `GET`
+* **URL:** `http://localhost:6543/api/matakuliah`
+* **Request:**
+
+```bash
+curl -X GET http://localhost:6543/api/matakuliah
+
+```
+
+* **Response:**
+
+```json
+{
+  "matakuliahs": [
+    {
+      "id": 1,
+      "kode_mk": "IF101",
+      "nama_mk": "Algoritma dan Pemrograman",
+      "sks": 3,
+      "semester": 1
+    }
+  ]
+}
+
+```
+
+### 2. Create Matakuliah
+
+Menambahkan data mata kuliah baru ke database.
+
+* **Method:** `POST`
+* **URL:** `http://localhost:6543/api/matakuliah`
+* **Request:**
+
+```bash
+curl -X POST http://localhost:6543/api/matakuliah -H "Content-Type: application/json" -d '{"kode_mk": "IF202", "nama_mk": "Basis Data", "sks": 4, "semester": 3}'
+
+```
+
+* **Response:**
+
+```json
+{
+  "status": "success",
+  "data": {
+    "id": 2,
+    "kode_mk": "IF202",
+    "nama_mk": "Basis Data",
+    "sks": 4,
+    "semester": 3
+  }
+}
+
+```
+
+### 3. Delete Matakuliah
+
+Menghapus data mata kuliah berdasarkan ID.
+
+* **Method:** `DELETE`
+* **URL:** `http://localhost:6543/api/matakuliah/{id}`
+* **Request:**
+
+```bash
+curl -X DELETE http://localhost:6543/api/matakuliah/1
+
+```
+
+* **Response:**
+
+```json
+{
+  "status": "deleted",
+  "message": "Matakuliah ID 1 berhasil dihapus"
+}
+
+```
+
+---
+
+## Testing
+
+Pengujian fungsionalitas aplikasi dapat dilakukan melalui dua cara:
+
+1. **Frontend**: Melalui antarmuka grafis di browser pada alamat `http://localhost:6543/`.
+2. **Terminal**: Menggunakan perintah `curl` untuk menguji endpoint API secara langsung.
+
+```
+
+
+
+Sudah saya satukan semua ya. Apakah ada lagi yang bisa saya bantu buatkan sebelum kamu kumpul tugasnya?
+
+```
